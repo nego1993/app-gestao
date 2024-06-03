@@ -2,7 +2,7 @@
 
 // require base_path('routes/web.php');
 
-use App\Http\Controllers\{PrincipalController, sobreNosController, ContatoController, FornecedorController, TesteController};
+use App\Http\Controllers\{PrincipalController, sobreNosController, ContatoController, FornecedorController, LoginController, TesteController};
 use App\Http\Middleware\AutenticacaoMiddleware;
 use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +25,8 @@ Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
 Route::post('/contato', [ContatoController::class, 'salvar'])->name('contato');
 
 
-Route::get('/login', function () { return 'Login'; })->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 
 Route::middleware(AutenticacaoMiddleware::class)->group( function() {
        Route::prefix('/app')->group(function () {
